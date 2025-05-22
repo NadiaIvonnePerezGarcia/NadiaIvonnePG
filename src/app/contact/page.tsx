@@ -55,7 +55,7 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
           <div className="p-8 md:p-12">
             <div className="space-y-6">
-              {contactInfo.map((item, index) => (
+              {contactInfo.map((item) => ( // Se eliminó 'index' de aquí
                 <motion.a
                   key={item.label}
                   href={item.href}

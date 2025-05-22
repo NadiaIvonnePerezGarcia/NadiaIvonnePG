@@ -1,6 +1,6 @@
 'use client'; // Necesario para AnimatePresence y usePathname
 
-import type { Metadata } from "next"; // Metadata puede seguir usándose en Client Components
+// import type { Metadata } from "next"; // Metadata no se usa aquí debido a 'use client'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -40,8 +40,8 @@ export default function RootLayout({
     <html lang="es">
       <head> 
         {/* Metadatos básicos si no se usa la exportación `metadata` */}
-        <title>Portafolio de Jonathan Serafín</title>
-        <meta name="description" content="Portafolio profesional de Jonathan Serafín Contreras Malfavón, Desarrollador Full-Stack." />
+        <title>Portafolio de Nadia Pérez</title> {/* Actualizado el título */}
+        <meta name="description" content="Portafolio profesional de Nadia Pérez, Estudiante de Ingeniería en Sistemas Computacionales." /> {/* Actualizada la descripción */}
       </head>
       <body className={`${inter.className} bg-gray-100`}> {/* Añadido un bg general */}
         <Navbar />
