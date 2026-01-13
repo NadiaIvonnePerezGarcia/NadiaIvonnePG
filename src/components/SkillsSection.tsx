@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { FaReact, FaGitAlt, FaGithub, FaAws, FaJava, FaDocker, FaCode, FaLightbulb, FaUsers, FaHeart } from 'react-icons/fa';
+import React from 'react';
+import { FaReact, FaGithub, FaAws, FaJava, FaDocker, FaCode, FaLightbulb, FaUsers, FaHeart } from 'react-icons/fa';
 import { SiVuedotjs, SiFlutter, SiPython, SiFigma, SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
