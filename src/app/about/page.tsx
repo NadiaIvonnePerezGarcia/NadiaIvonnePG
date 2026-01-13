@@ -268,7 +268,7 @@ export default function AboutPage() {
                 <span className="text-2xl">🇺🇸</span>
                 <div>
                   <p className="text-white font-medium">English</p>
-                  <p className="text-neutral-500 text-sm">B2 - Intermedio Avanzado</p>
+                  <p className="text-neutral-500 text-sm">B2</p>
                 </div>
               </div>
             </div>

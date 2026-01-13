@@ -34,7 +34,10 @@ const projectsData = [
     longDescription: "Landing Page de alto impacto visual optimizada para conversión de clientes. Visualización de servicios tecnológicos: Cloud Streaming, IA, Analytics. Diseño responsivo y optimización de rendimiento web.",
     technologies: ["Vue.js", "CSS3", "JavaScript", "UI/UX", "Diseño Responsivo"],
     images: [
-      "/images/projects/placeholder-inmoblock.png",
+      "/images/projects/i1.png",
+      "/images/projects/i2.png",
+      "/images/projects/i3.png",
+      "/images/projects/i4.png",
     ],
     projectUrl: "https://www.inmoblock.com",
     repoUrl: "#",
@@ -70,7 +73,10 @@ const projectsData = [
     longDescription: "Desarrollo con Next.js para interfaces reactivas y modernas. Ejecución del despliegue en la nube utilizando Hostinger, configuración de dominio y base de datos MySQL.",
     technologies: ["Next.js", "React", "MySQL", "Hostinger", "API REST"],
     images: [
-      "/images/projects/placeholder-plusjolie.png",
+      "/images/projects/pj1.png",
+      "/images/projects/pj2.png",
+      "/images/projects/pj3.png",
+      "/images/projects/pj4.png",
     ],
     projectUrl: "#",
     repoUrl: "#",
@@ -172,42 +178,43 @@ export default function ProjectsPage() {
             >
               <div className="bg-gradient-to-br from-neutral-900/80 to-neutral-900/50 border border-neutral-800 rounded-3xl overflow-hidden">
 
-                {/* Image Section - Always Horizontal */}
-                <div className="relative w-full aspect-[16/9] bg-neutral-800 overflow-hidden">
-                  {/* Show multiple vertical images side by side if there are many */}
-                  {images.length > 2 ? (
-                    <div className="absolute inset-0 flex">
-                      {images.slice(0, 3).map((img, i) => (
-                        <div key={i} className="relative flex-1 h-full border-r border-neutral-700 last:border-r-0">
-                          <Image
-                            src={img}
-                            alt={`${currentProject.title} screenshot ${i + 1}`}
-                            layout="fill"
-                            objectFit="cover"
-                            className={`transition-all duration-300 ${currentImageIndex === i ? 'opacity-100 scale-100' : 'opacity-70 hover:opacity-100'}`}
-                            onClick={() => setCurrentImageIndex(i)}
-                          />
-                          {currentImageIndex === i && (
-                            <div className="absolute inset-0 border-2 border-pink-500 pointer-events-none"></div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <Image
-                      src={images[0]}
-                      alt={currentProject.title}
-                      layout="fill"
-                      objectFit="cover"
-                    />
+                {/* Image Section - Carousel with Navigation */}
+                <div className="relative w-full aspect-[16/9] bg-neutral-800 overflow-hidden group">
+                  {/* Main Image Display */}
+                  <Image
+                    src={images[currentImageIndex]}
+                    alt={`${currentProject.title} screenshot ${currentImageIndex + 1}`}
+                    layout="fill"
+                    objectFit="contain"
+                    className="transition-all duration-500"
+                  />
+
+                  {/* Image Navigation Arrows */}
+                  {images.length > 1 && (
+                    <>
+                      <button
+                        onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)}
+                        className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-pink-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all z-10"
+                        aria-label="Imagen anterior"
+                      >
+                        <FaChevronLeft size={14} />
+                      </button>
+                      <button
+                        onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)}
+                        className="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-pink-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all z-10"
+                        aria-label="Siguiente imagen"
+                      >
+                        <FaChevronRight size={14} />
+                      </button>
+                    </>
                   )}
 
                   {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent pointer-events-none"></div>
 
                   {/* Image Navigation Dots */}
                   {images.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                       {images.map((_, i) => (
                         <button
                           key={i}
@@ -216,6 +223,13 @@ export default function ProjectsPage() {
                             }`}
                         />
                       ))}
+                    </div>
+                  )}
+
+                  {/* Image Counter */}
+                  {images.length > 1 && (
+                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm text-white rounded-full text-sm font-medium">
+                      {currentImageIndex + 1} / {images.length}
                     </div>
                   )}
 
@@ -306,8 +320,8 @@ export default function ProjectsPage() {
                   setCurrentIndex(index);
                 }}
                 className={`h-2 rounded-full transition-all ${index === currentIndex
-                    ? 'bg-pink-500 w-8'
-                    : 'bg-neutral-700 w-2 hover:bg-neutral-600'
+                  ? 'bg-pink-500 w-8'
+                  : 'bg-neutral-700 w-2 hover:bg-neutral-600'
                   }`}
                 aria-label={`Ver proyecto ${project.title}`}
               />
@@ -331,8 +345,8 @@ export default function ProjectsPage() {
                 setCurrentIndex(index);
               }}
               className={`group p-4 rounded-2xl border transition-all text-left ${index === currentIndex
-                  ? 'bg-pink-500/10 border-pink-500/30'
-                  : 'bg-neutral-900/50 border-neutral-800 hover:border-pink-500/30'
+                ? 'bg-pink-500/10 border-pink-500/30'
+                : 'bg-neutral-900/50 border-neutral-800 hover:border-pink-500/30'
                 }`}
             >
               <h3 className="font-semibold text-white mb-1 group-hover:text-pink-400 transition-colors">

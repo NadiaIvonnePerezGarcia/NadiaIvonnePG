@@ -182,7 +182,7 @@ export default function HomePage() {
               {/* Image Container */}
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glow-accent-ring">
                 <Image
-                  src="/images/projects/perfil.jpg"
+                  src="/images/projects/perfil.jpeg"
                   alt="Nadia Pérez"
                   layout="fill"
                   objectFit="cover"
