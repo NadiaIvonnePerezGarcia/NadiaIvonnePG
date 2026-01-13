@@ -1,118 +1,349 @@
 'use client';
 
-import ProjectCard from '@/components/ProjectCard';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 
 const projectsData = [
   {
+    id: "alzia",
+    title: "AlzIA",
+    subtitle: "Detección de Deterioro Cognitivo",
+    description: "App para detección de deterioro cognitivo leve mediante un agente de IA conversacional en vivo. Análisis de biomarcadores lingüísticos usando Whisper (voz a texto) y un LLM para la detección temprana.",
+    longDescription: "Lideré la integración técnica entre la app móvil (React Native) y backend de microservicios en Java Spring Boot. Visualización de datos médicos bajo estándar HL7 FHIR. Interfaces accesibles para adultos mayores con metodología Lean Healthcare.",
+    technologies: ["React Native", "Java Spring Boot", "Whisper", "LLM", "HL7 FHIR", "Figma"],
+    images: [
+      "/images/projects/a2.jpg",
+      "/images/projects/a1.jpg",
+      "/images/projects/a3.jpg",
+      "/images/projects/a4.jpg",
+      "/images/projects/a5.jpg",
+    ],
+    projectUrl: "#",
+    repoUrl: "#",
+    period: "Ago 2024 - Dic 2025",
+    company: "Smart Health Solutions",
+    highlight: "IA Conversacional"
+  },
+  {
+    id: "inmoblock",
+    title: "InmoBlock",
+    subtitle: "Gemelos Digitales PropTech",
+    description: "Plataforma web para soluciones de Gemelos Digitales en el sector inmobiliario con tecnología inmersiva 3D.",
+    longDescription: "Landing Page de alto impacto visual optimizada para conversión de clientes. Visualización de servicios tecnológicos: Cloud Streaming, IA, Analytics. Diseño responsivo y optimización de rendimiento web.",
+    technologies: ["Vue.js", "CSS3", "JavaScript", "UI/UX", "Diseño Responsivo"],
+    images: [
+      "/images/projects/placeholder-inmoblock.png",
+    ],
+    projectUrl: "https://www.inmoblock.com",
+    repoUrl: "#",
+    period: "2024",
+    company: "PropTech Freelance",
+    highlight: "Landing Page 3D"
+  },
+  {
     id: "glucolifestyle",
-    title: "GlucoLifeStyle.AI – Plataforma para Monitoreo de Diabetes",
-    description: "Aplicación móvil desarrollada con Flutter para el registro y seguimiento de niveles de glucosa, estado de ánimo, alimentación, sueño y ejercicio. Como Frontend Lead & Developer, lideré la planificación y ejecución de tareas del equipo frontend utilizando Jira y Git/GitHub. Desarrollé múltiples módulos incluyendo la conectividad Bluetooth con dispositivos medidores, gestión de datos del usuario, y sistema de traducción automática.",
-    technologies: ["Flutter", "Riverpod", "Firebase", "Bluetooth API", "APIs REST", "Git", "GitHub", "Jira", "Figma"],
-    imageUrl: "/images/projects/s11.jpg", 
-    imageUrls: [
+    title: "GlucoLifeStyle.AI",
+    subtitle: "Monitoreo de Diabetes",
+    description: "App multiplataforma con Flutter para monitoreo de salud integrando conexión Bluetooth con glucómetros. Incluye desarrollo de página web oficial.",
+    longDescription: "Refactorización de módulos clave (Diario de Estilo de Vida) para mejorar usabilidad. Gestión completa del proceso de publicación: generación de archivos APK y AAB para Google Play Console. Desarrollo de la página web del proyecto.",
+    technologies: ["Flutter", "Firebase", "Bluetooth API", "Riverpod", "Web"],
+    images: [
       "/images/projects/s11.jpg",
       "/images/projects/s12.jpg",
       "/images/projects/s13.jpg",
       "/images/projects/s14.jpg",
       "/images/projects/s15.jpg",
     ],
-    projectUrl: "#", // Reemplazar con URL real si existe
-    repoUrl: "#", // Reemplazar con URL real si existe
-    achievement: "Implementación exitosa de todas las funcionalidades clave y preparación completa para publicación en Google Play Store.",
-    period: "2023 - actualidad",
+    projectUrl: "#",
+    repoUrl: "#",
+    period: "Feb - Jun 2025",
+    company: "TecNM Campus Morelia",
+    highlight: "App + Web"
   },
   {
-    id: "alzia",
-    title: "AlzIA – Asistente Virtual para Detección de Alzheimer",
-    description: "Aplicación móvil que permite conversaciones con un asistente virtual inteligente para analizar el lenguaje del usuario en tiempo real y detectar posibles signos tempranos de Alzheimer. Se implementó procesamiento de lenguaje natural y diseño de interfaz intuitiva.",
-    technologies: ["Flutter", "Firebase", "NLP", "Figma"],
-    imageUrl: "/images/projects/a2.jpg", // Imagen principal solicitada
-    imageUrls: [
-      "/images/projects/a2.jpg",
-      "/images/projects/a1.jpg",
-      "/images/projects/a3.jpg",
-      "/images/projects/a4.jpg",
-      "/images/projects/a5.jpg",
-      "/images/projects/a6.jpg",
+    id: "plusjolie",
+    title: "PlusJolie",
+    subtitle: "Sistema POS Retail",
+    description: "Sistema de Punto de Venta (POS) y catálogo en línea completo para tienda de retail.",
+    longDescription: "Desarrollo con Next.js para interfaces reactivas y modernas. Ejecución del despliegue en la nube utilizando Hostinger, configuración de dominio y base de datos MySQL.",
+    technologies: ["Next.js", "React", "MySQL", "Hostinger", "API REST"],
+    images: [
+      "/images/projects/placeholder-plusjolie.png",
     ],
-    projectUrl: "#", // Reemplazar con URL real si existe
-    repoUrl: "#", // Reemplazar con URL real si existe
-    achievement: "Ganadora del evento Innovatec (fase local). Actualmente compitiendo en la etapa regional.",
+    projectUrl: "#",
+    repoUrl: "#",
     period: "2024",
-  },
-  {
-    id: "ponylink",
-    title: "PonyLink – Red Social Estudiantil",
-    description: "Plataforma web inspirada en LinkedIn, diseñada específicamente para la comunidad estudiantil del Tecnológico de Morelia. PonyLink facilita la conexión entre estudiantes, permitiéndoles crear perfiles profesionales, compartir proyectos, buscar colaboradores y establecer una red de contactos dentro de la institución. Desarrollada con Vue.js para el frontend y Laravel para el backend, buscando ofrecer una experiencia de usuario fluida y herramientas útiles para el desarrollo académico y profesional de los 'ponys'.",
-    technologies: ["Vue.js", "Laravel", "MySQL", "API REST", "Git", "GitHub"],
-    imageUrl: "/images/projects/p1.png", 
-    imageUrls: [
-      "/images/projects/p1.png",
-      "/images/projects/p2.png",
-      "/images/projects/p3.png",
-    ],
-    projectUrl: "#", // Reemplazar con URL real si existe
-    repoUrl: "#", // Reemplazar con URL real si existe
-    // achievement: "Logro destacado si aplica", // Opcional
-    period: "2023", // Ajustar si es diferente
+    company: "Retail Freelance",
+    highlight: "E-commerce"
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 export default function ProjectsPage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const currentProject = projectsData[currentIndex];
+  const images = currentProject.images;
+
+  const nextProject = () => {
+    setDirection(1);
+    setCurrentImageIndex(0);
+    setCurrentIndex((prev) => (prev + 1) % projectsData.length);
+  };
+
+  const prevProject = () => {
+    setDirection(-1);
+    setCurrentImageIndex(0);
+    setCurrentIndex((prev) => (prev - 1 + projectsData.length) % projectsData.length);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 200 : -200,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 200 : -200,
+      opacity: 0
+    })
+  };
+
   return (
-    <motion.section 
-      className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-primary-light/5 to-white"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <div className="container mx-auto px-6 md:px-12">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-12 md:mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+    <div className="min-h-screen py-32 px-6 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl"></div>
+
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
         >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-primary-dark"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <p className="text-pink-400 text-sm uppercase tracking-[0.3em] mb-4">Portafolio</p>
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-4"
+            style={{ fontFamily: 'var(--font-playfair), serif' }}
           >
-            Proyectos Destacados
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-700"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Una muestra de mi experiencia en desarrollo de software y soluciones tecnológicas.
-          </motion.p>
+            Mis Proyectos
+          </h1>
+          <p className="text-neutral-400 max-w-2xl mx-auto">
+            Experiencia en desarrollo web, aplicaciones móviles y soluciones cloud.
+          </p>
         </motion.div>
 
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 place-items-start sm:place-items-center" 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+        {/* Project Showcase */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevProject}
+            className="absolute -left-4 lg:-left-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-pink-500/20 backdrop-blur-sm border border-pink-500/30 flex items-center justify-center text-white hover:bg-pink-500/30 transition-all"
+            aria-label="Proyecto anterior"
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            onClick={nextProject}
+            className="absolute -right-4 lg:-right-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-pink-500/20 backdrop-blur-sm border border-pink-500/30 flex items-center justify-center text-white hover:bg-pink-500/30 transition-all"
+            aria-label="Siguiente proyecto"
+          >
+            <FaChevronRight />
+          </button>
+
+          {/* Main Project Card */}
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <div className="bg-gradient-to-br from-neutral-900/80 to-neutral-900/50 border border-neutral-800 rounded-3xl overflow-hidden">
+
+                {/* Image Section - Always Horizontal */}
+                <div className="relative w-full aspect-[16/9] bg-neutral-800 overflow-hidden">
+                  {/* Show multiple vertical images side by side if there are many */}
+                  {images.length > 2 ? (
+                    <div className="absolute inset-0 flex">
+                      {images.slice(0, 3).map((img, i) => (
+                        <div key={i} className="relative flex-1 h-full border-r border-neutral-700 last:border-r-0">
+                          <Image
+                            src={img}
+                            alt={`${currentProject.title} screenshot ${i + 1}`}
+                            layout="fill"
+                            objectFit="cover"
+                            className={`transition-all duration-300 ${currentImageIndex === i ? 'opacity-100 scale-100' : 'opacity-70 hover:opacity-100'}`}
+                            onClick={() => setCurrentImageIndex(i)}
+                          />
+                          {currentImageIndex === i && (
+                            <div className="absolute inset-0 border-2 border-pink-500 pointer-events-none"></div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <Image
+                      src={images[0]}
+                      alt={currentProject.title}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  )}
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent"></div>
+
+                  {/* Image Navigation Dots */}
+                  {images.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {images.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentImageIndex(i)}
+                          className={`h-2 rounded-full transition-all ${i === currentImageIndex ? 'bg-pink-500 w-6' : 'bg-white/40 w-2 hover:bg-white/60'
+                            }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Highlight badge */}
+                  {currentProject.highlight && (
+                    <div className="absolute top-4 right-4 px-3 py-1.5 bg-pink-500/90 backdrop-blur-sm text-white rounded-full text-sm font-medium shadow-lg">
+                      {currentProject.highlight}
+                    </div>
+                  )}
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6 lg:p-10">
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-pink-400 text-sm font-medium">{currentProject.company}</span>
+                        <span className="text-neutral-600">•</span>
+                        <span className="text-neutral-500 text-sm">{currentProject.period}</span>
+                      </div>
+                      <h2
+                        className="text-3xl lg:text-4xl font-bold text-white mb-2"
+                        style={{ fontFamily: 'var(--font-playfair), serif' }}
+                      >
+                        {currentProject.title}
+                      </h2>
+                      <p className="text-pink-400 font-medium text-lg">{currentProject.subtitle}</p>
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex gap-3">
+                      {currentProject.projectUrl && currentProject.projectUrl !== "#" && (
+                        <a
+                          href={currentProject.projectUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary text-sm py-2.5 flex items-center gap-2"
+                        >
+                          <FaExternalLinkAlt size={12} />
+                          Ver Proyecto
+                        </a>
+                      )}
+                      {currentProject.repoUrl && currentProject.repoUrl !== "#" && (
+                        <a
+                          href={currentProject.repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-secondary text-sm py-2.5 flex items-center gap-2"
+                        >
+                          <FaGithub size={14} />
+                          Código
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="text-neutral-300 mb-3 leading-relaxed">
+                    {currentProject.description}
+                  </p>
+                  <p className="text-neutral-500 text-sm mb-6 leading-relaxed">
+                    {currentProject.longDescription}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2">
+                    {currentProject.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1.5 bg-neutral-800/80 border border-neutral-700 text-neutral-300 rounded-lg text-xs font-medium hover:border-pink-500/30 hover:text-pink-300 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Project Indicators */}
+          <div className="flex justify-center gap-3 mt-8">
+            {projectsData.map((project, index) => (
+              <button
+                key={project.id}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentImageIndex(0);
+                  setCurrentIndex(index);
+                }}
+                className={`h-2 rounded-full transition-all ${index === currentIndex
+                    ? 'bg-pink-500 w-8'
+                    : 'bg-neutral-700 w-2 hover:bg-neutral-600'
+                  }`}
+                aria-label={`Ver proyecto ${project.title}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Project Grid */}
+        <motion.div
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
         >
-          {projectsData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projectsData.map((project, index) => (
+            <button
+              key={project.id}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentImageIndex(0);
+                setCurrentIndex(index);
+              }}
+              className={`group p-4 rounded-2xl border transition-all text-left ${index === currentIndex
+                  ? 'bg-pink-500/10 border-pink-500/30'
+                  : 'bg-neutral-900/50 border-neutral-800 hover:border-pink-500/30'
+                }`}
+            >
+              <h3 className="font-semibold text-white mb-1 group-hover:text-pink-400 transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-neutral-500 text-xs">{project.subtitle}</p>
+              <p className="text-pink-400/70 text-xs mt-2">{project.period}</p>
+            </button>
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </div>
   );
 }

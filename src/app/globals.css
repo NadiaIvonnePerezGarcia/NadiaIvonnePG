@@ -1,69 +1,215 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #00acc1;
-  --primary-light: #5ddef4;
-  --primary-dark: #007c91;
-  --primary-contrast: #ffffff;
-  --accent: #00838f;
+  --background: #0a0a0a;
+  --background-secondary: #0f0f0f;
+  --surface: #141414;
+  --surface-hover: #1a1a1a;
+  --foreground: #ffffff;
+  --foreground-muted: #a3a3a3;
+  --foreground-subtle: #666666;
+  --accent: #ec4899;
+  --accent-secondary: #f472b6;
+  --accent-glow: rgba(236, 72, 153, 0.4);
+  --border: #262626;
+  --border-subtle: #1f1f1f;
+  --gradient-start: #ec4899;
+  --gradient-end: #db2777;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-light: var(--primary-light);
-  --color-primary-dark: var(--primary-dark);
-  --color-primary-contrast: var(--primary-contrast);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
   --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-glow: var(--accent-glow);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #00acc1;
-    --primary-light: #5ddef4;
-    --primary-dark: #007c91;
-    --primary-contrast: #ffffff;
-    --accent: #00838f;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.text-primary {
-  color: var(--primary);
+/* Decorative Font Class */
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
 }
 
-.bg-primary {
-  background-color: var(--primary);
-  color: var(--primary-contrast);
+.font-script {
+  font-family: 'Dancing Script', cursive;
 }
 
-.bg-primary-light {
-  background-color: var(--primary-light);
-  color: var(--foreground);
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.bg-primary-dark {
-  background-color: var(--primary-dark);
-  color: var(--primary-contrast);
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gradient-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.hover\:bg-primary-dark:hover {
-  background-color: var(--primary-dark);
-  color: var(--primary-contrast);
+/* Glow Effects */
+.glow-accent {
+  box-shadow: 0 0 60px var(--accent-glow), 0 0 120px rgba(236, 72, 153, 0.2);
 }
 
-.border-primary {
-  border-color: var(--primary);
+.glow-accent-sm {
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.glow-accent-ring {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 40px var(--accent-glow);
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+  border-color: rgba(236, 72, 153, 0.3);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.1);
+}
+
+.card-glass {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+}
+
+/* Gradient Border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent, var(--accent));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gradient-end) 100%);
+  color: white;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(236, 72, 153, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: white;
+  font-weight: 500;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  background: rgba(236, 72, 153, 0.1);
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* Decorative Elements */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(236, 72, 153, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 72, 153, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.bg-radial-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(236, 72, 153, 0.15), transparent);
 }
